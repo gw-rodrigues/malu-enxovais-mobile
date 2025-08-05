@@ -3,9 +3,14 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@/assets": ["./assets/*"],
+      "@/components": ["./components/*"],
+      "@/ui": ["./components/ui/*"],
+      "@/constants": ["./constants/*"],
+      "@/hooks": ["./hooks/*"],
+      "@/libs": ["./libs/*"],
+      "tailwind.config": ["./tailwind.config.js"]
     }
   },
   "include": [
