@@ -14,7 +14,6 @@ export default function TabLayout() {
 
   const { isAuthenticated } = useAuthStore()
 
-  console.log('isAuth', isAuthenticated)
   if (!isAuthenticated) {
     return <Redirect href="/splash-screen" />
   }
