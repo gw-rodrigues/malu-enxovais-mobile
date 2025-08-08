@@ -8,14 +8,13 @@ type AuthLayoutProps = {
 }
 
 export const AuthLayout = (props: AuthLayoutProps) => {
-  console.log('AuthLayout rendered')
   return (
     <SafeAreaView className="w-full h-full">
       <ScrollView
         className="w-full h-full"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <HStack className="justify-center flex-grow w-full h-full bg-background-0">
+        <HStack className="justify-center flex-grow w-full h-full ">
           <VStack
             className="relative items-center justify-center flex-1 hidden w-full h-full md:flex"
             space="md"
