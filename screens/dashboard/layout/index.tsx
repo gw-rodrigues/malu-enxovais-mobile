@@ -4,7 +4,6 @@ import { VStack } from '@/components/ui/vstack'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import useAuthStore from '@/store/auth.store'
 import { Redirect } from 'expo-router'
-import NavBar from '../navbar'
 
 type AuthLayoutProps = {
   children: React.ReactNode
@@ -20,12 +19,11 @@ export default function TabLayout(props: AuthLayoutProps) {
   }
 
   return (
-    <SafeAreaView className="w-full h-full">
+    <SafeAreaView className="w-full h-full" edges={['bottom']}>
       <ScrollView
         className="w-full h-full"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <NavBar />
         <VStack space="3xl" className="p-4 mb-20">
           {props.children}
         </VStack>
