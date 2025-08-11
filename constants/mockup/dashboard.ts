@@ -19,11 +19,11 @@ interface DashboardData {
   }[]
   recentActivities: {
     id: string
-    type: 'delivery' | 'trip' | 'stock'
+    type: 'delivery' | 'trip' | 'stock' | 'system'
     title: string
     description: string
     timestamp: string
-    icon: string
+    status: 'success' | 'info' | 'warning' | 'error' | 'muted' | undefined
   }[]
 }
 
@@ -65,11 +65,11 @@ export function DashboardMockupData() {
         recentActivities: [
           {
             id: 'act-1',
-            type: 'delivery',
+            type: 'system',
             title: 'Sistema inicializado',
             description: 'Dashboard carregado com sucesso',
             timestamp: 'agora',
-            icon: 'check',
+            status: 'success',
           },
           {
             id: 'act-2',
@@ -77,7 +77,7 @@ export function DashboardMockupData() {
             title: '8 viagens ativas',
             description: 'Operações em andamento',
             timestamp: '5min',
-            icon: 'truck',
+            status: 'info',
           },
           {
             id: 'act-3',
@@ -85,7 +85,7 @@ export function DashboardMockupData() {
             title: '12 produtos em estoque baixo',
             description: 'Atenção necessária',
             timestamp: '10min',
-            icon: 'alert',
+            status: 'error',
           },
         ],
       }
@@ -107,7 +107,7 @@ export function DashboardMockupData() {
             title: 'Modo demonstração',
             description: 'Dados simulados para teste',
             timestamp: 'agora',
-            icon: 'alert',
+            status: 'warning',
           },
         ],
       })

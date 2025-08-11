@@ -24,7 +24,7 @@ export default function TabLayout(props: AuthLayoutProps) {
         className="w-full h-full"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <VStack space="3xl" className="p-4">
+        <VStack space="3xl" className="p-4 mb-20">
           {props.children}
         </VStack>
       </ScrollView>
