@@ -1,9 +1,8 @@
+import Logo from '@/assets/images/icon-dark.svg'
 import { HStack } from '@/components/ui/hstack'
 import { Icon } from '@/components/ui/icon'
 import { Pressable } from '@/components/ui/pressable'
 import { Bell, Menu } from 'lucide-react-native'
-import { SafeAreaView } from '@/components/ui/safe-area-view'
-import Logo from '@/assets/images/icon-dark.svg'
 
 export function TopNavbar() {
   return (
