@@ -8,30 +8,17 @@ import {
 import { HStack } from '@/components/ui/hstack'
 import { AlertCircleIcon } from '@/components/ui/icon'
 import { Input, InputField, InputIcon, InputSlot } from '@/components/ui/input'
-
+import { Segment } from '@/components/ui/segment'
 import { VStack } from '@/components/ui/vstack'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { useLinkBuilder, useTheme } from '@react-navigation/native'
 import { SearchIcon, Settings2 } from 'lucide-react-native'
 import { useState } from 'react'
-import { Animated, Platform, TouchableOpacity, View } from 'react-native'
+
 import ProductsInDelivery from '../products-in-delivery'
 import ProductsInStock from '../products-in-stock'
-
-const Tab = createMaterialTopTabNavigator()
 
 export default function ProductsContainer() {
   const [isInvalid, setIsInvalid] = useState(false)
   const [filters, setFilters] = useState({ input: '', category: '' })
-  const allStockProducts = [{ name: '' }]
-  const allDeliveryProducts = [{ name: '' }]
-
-  const filteredStock = allStockProducts.filter((p) =>
-    p.name.includes(filters.input),
-  )
-  const filteredDelivery = allDeliveryProducts.filter((p) =>
-    p.name.includes(filters.input),
-  )
 
   return (
     <VStack space="lg" className="flex-grow">
@@ -69,68 +56,17 @@ export default function ProductsContainer() {
         </FormControlError>
       </FormControl>
 
-      <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
-        <Tab.Screen name="Produtos" component={() => <ProductsInStock />} />
-        <Tab.Screen
-          name="Movimentações"
-          component={() => <ProductsInDelivery />}
-        />
-      </Tab.Navigator>
+      <Segment
+        defaultKey="stock"
+        items={[
+          { key: 'stock', title: 'Em armazém', component: ProductsInStock },
+          {
+            key: 'delivery',
+            title: 'Em movimento',
+            component: ProductsInDelivery,
+          },
+        ]}
+      />
     </VStack>
-  )
-}
-
-function MyTabBar({ state, descriptors, navigation, position }) {
-  const { colors } = useTheme()
-  const { buildHref } = useLinkBuilder()
-
-  return (
-    <View className="flex-row overflow-hidden bg-white border-b border-gray-300 rounded-xl">
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key]
-        const label = options.tabBarLabel ?? options.title ?? route.name
-        const isFocused = state.index === index
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          })
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, route.params)
-          }
-        }
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          })
-        }
-
-        return (
-          <TouchableOpacity
-            key={route.key}
-            href={buildHref(route.name, route.params)}
-            accessibilityRole={Platform.OS === 'web' ? 'link' : 'button'}
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarButtonTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            className={`items-center flex-1 py-3 ${
-              index > 0 && `border-l border-gray-300`
-            } ${isFocused && `bg-primary-500`}`}
-          >
-            <Animated.Text
-              className={isFocused ? 'text-white font-bold' : colors.text}
-            >
-              {label}
-            </Animated.Text>
-          </TouchableOpacity>
-        )
-      })}
-    </View>
   )
 }
