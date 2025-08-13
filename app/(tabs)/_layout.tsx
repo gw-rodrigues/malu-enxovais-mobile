@@ -21,7 +21,7 @@ export default function TabLayout() {
   }
 
   return (
-    <SafeAreaView className="w-full h-full">
+    <SafeAreaView className="flex-1 w-full h-full">
       <TopNavbar />
       <Tabs
         screenOptions={{
