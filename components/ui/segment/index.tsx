@@ -22,6 +22,7 @@ export function Segment<P extends React.JSX.IntrinsicAttributes>({
   const initialKey = defaultKey || items[0]?.key
   const [selected, setSelected] = useState(initialKey)
   const [loadedKeys, setLoadedKeys] = useState(new Set([initialKey]))
+  const totalItens = items.length
 
   const handleSelect = (key: string) => {
     setSelected(key)
@@ -45,7 +46,9 @@ export function Segment<P extends React.JSX.IntrinsicAttributes>({
             onPress={() => handleSelect(item.key)}
             className="flex-1 transition-colors duration-300 border-0 rounded-none"
           >
-            <ButtonText>{item.title}</ButtonText>
+            <ButtonText>
+              {item.title} ({totalItens})
+            </ButtonText>
           </Button>
         ))}
       </ButtonGroup>
