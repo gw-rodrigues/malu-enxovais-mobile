@@ -112,7 +112,7 @@ export default function QuickInfo() {
 
         <HStack className="items-center justify-between mt-4">
           <Heading size="xl">
-            {mockAnalyticsData.summary.conversionRate.toLocaleString()}
+            {mockAnalyticsData.summary.conversionRate.toLocaleString()}%
           </Heading>
 
           <Badge
