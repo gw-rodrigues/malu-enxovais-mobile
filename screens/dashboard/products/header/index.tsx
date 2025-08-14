@@ -61,10 +61,10 @@ export default function Header() {
                 className="text-gray-600 group-hover:text-white group-active:text-white"
               />
               <Text className="mt-2 group-hover:text-white group-active:text-white">
-                Adicionar
+                Novo produto
               </Text>
               <Text className="opacity-80 group-hover:text-white group-active:text-white">
-                Novo produto
+                Adicionar
               </Text>
             </VStack>
           </Button>
