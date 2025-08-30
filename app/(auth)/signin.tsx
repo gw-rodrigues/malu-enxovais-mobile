@@ -1,2 +1,2 @@
-import { SignIn } from '@/screens/auth/signin'
+import { SignIn } from '@/features/auth/screens/LoginScreen'
 export default SignIn

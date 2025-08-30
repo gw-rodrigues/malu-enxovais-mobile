@@ -4,13 +4,19 @@
     "strict": true,
     "paths": {
       "@/*": ["./*"],
-      "@/assets": ["./assets/*"],
-      "@/components": ["./components/*"],
-      "@/ui": ["./components/ui/*"],
-      "@/constants": ["./constants/*"],
-      "@/hooks": ["./hooks/*"],
-      "@/libs": ["./libs/*"],
-      "tailwind.config": ["./tailwind.config.js"]
+      "@/assets/*": ["./src/assets/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/layout/*": ["./src/components/layout/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "tailwind.config": ["./tailwind.config"]
     }
   },
   "include": [
@@ -18,6 +24,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "app-env.d.ts"
   ]
 }

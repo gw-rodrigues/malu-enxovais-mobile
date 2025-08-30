@@ -11,26 +11,24 @@ import 'react-native-reanimated'
 import { useColorScheme } from '@/hooks/useColorScheme'
 
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
-import useAuthStore from '@/store/auth.store'
+import useAuthStore, { AuthUserRole } from '@/features/auth/hooks/useAuthStore'
+import '@/styles/global.css'
 import { useEffect } from 'react'
-import './global.css'
 
 export default function RootLayout() {
-  const { isLoading, fetchAuthenticatedUser, initAuthListenerWithCleanup } =
-    useAuthStore()
+  const { isLoading, initAuthListener, user } = useAuthStore()
   const colorScheme = useColorScheme()
   const [fontLoaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require('../src/assets/fonts/SpaceMono-Regular.ttf'),
   })
 
   useEffect(() => {
     if (error) throw error
-    if (fontLoaded) SplashScreen.hideAsync()
-  }, [fontLoaded, error])
+    if (fontLoaded && !isLoading) SplashScreen.hideAsync()
+  }, [fontLoaded, error, isLoading])
 
   useEffect(() => {
-    const unsubscribe = initAuthListenerWithCleanup()
-    fetchAuthenticatedUser()
+    const unsubscribe = initAuthListener()
     return unsubscribe
   }, [])
 
@@ -38,16 +36,36 @@ export default function RootLayout() {
     return null
   }
 
+  console.log('user', user)
+
   return (
     <GluestackUIProvider mode={(colorScheme ?? 'light') as 'light' | 'dark'}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <RootNavigator />
         <StatusBar style="auto" />
       </ThemeProvider>
     </GluestackUIProvider>
+  )
+}
+
+function RootNavigator() {
+  const { isAuthenticated, hasRole } = useAuthStore()
+
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Protected guard={hasRole(AuthUserRole.ADMIN)}>
+        <Stack.Screen name="(admin)" />
+      </Stack.Protected>
+
+      <Stack.Protected guard={hasRole(AuthUserRole.DRIVER)}>
+        <Stack.Screen name="(driver)" />
+      </Stack.Protected>
+
+      <Stack.Protected guard={!isAuthenticated()}>
+        <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+
+      <Stack.Screen name="+not-found" />
+    </Stack>
   )
 }

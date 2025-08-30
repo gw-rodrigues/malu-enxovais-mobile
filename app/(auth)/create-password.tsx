@@ -1,2 +1,2 @@
-import { CreatePassword } from "@/screens/auth/create-password";
-export default CreatePassword;
+import { CreatePassword } from '@/features/auth/screens/CreatePasswordScreen'
+export default CreatePassword
