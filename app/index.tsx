@@ -10,6 +10,7 @@ import useAuthStore, {
 import { AuthLayout } from '@/src/components/layout/AuthLayout'
 import { Spinner } from '@/src/components/ui/spinner'
 import { Redirect } from 'expo-router'
+import { useEffect } from 'react'
 
 const SplashScreenWithLeftBackground = () => {
   const { colorScheme } = useColorScheme()
@@ -27,9 +28,13 @@ const SplashScreenWithLeftBackground = () => {
 
   const routeName = role ? roleRouteMap[role] : '/(auth)'
 
-  if (!role && isAuthenticated()) {
-    signOut()
-  }
+  console.log(routeName)
+
+  useEffect(() => {
+    if (!role && isAuthenticated()) {
+      signOut()
+    }
+  }, [role, isAuthenticated, signOut])
 
   return (
     <VStack
