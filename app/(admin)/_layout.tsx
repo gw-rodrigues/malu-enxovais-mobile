@@ -16,7 +16,7 @@ export default function TabLayout() {
 
   const { hasRole } = useAuthStore()
 
-  if (hasRole(AuthUserRole.ADMIN)) {
+  if (!hasRole(AuthUserRole.ADMIN)) {
     return <Redirect href="/" />
   }
 
