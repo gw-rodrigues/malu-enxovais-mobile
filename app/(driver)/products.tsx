@@ -1,3 +1,3 @@
-import { ProductsScreen } from '@/features/products/screens/ProductsScreen'
+import { ProductsScreen } from '@/features/driver/products/screens/ProductsScreen'
 
 export default ProductsScreen

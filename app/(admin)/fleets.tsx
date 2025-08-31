@@ -1,3 +1,3 @@
-import { FleetsScreen } from '@/features/fleets/screens/FleetsScreen'
+import { FleetsScreen } from '@/features/admin/fleets/screens/FleetsScreen'
 
 export default FleetsScreen

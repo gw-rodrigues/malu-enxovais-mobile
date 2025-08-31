@@ -1,3 +1,3 @@
-import { FleetsScreen } from '@/features/fleets/screens/FleetsScreen'
+import { FleetsScreen } from '@/features/driver/fleets/screens/FleetsScreen'
 
 export default FleetsScreen

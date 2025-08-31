@@ -1,2 +1,2 @@
-import { DashboardScreen } from '@/features/dashboard/screens/DashboardScreen'
+import { DashboardScreen } from '@/features/driver/dashboard/screens/DashboardScreen'
 export default DashboardScreen

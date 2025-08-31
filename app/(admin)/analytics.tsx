@@ -1,3 +1,3 @@
-import { AnalyticsScreen } from '@/features/analytics/screens/AnalyticsScreen'
+import { AnalyticsScreen } from '@/features/admin/analytics/screens/AnalyticsScreen'
 
 export default AnalyticsScreen

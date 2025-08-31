@@ -1,3 +1,3 @@
-import { AnalyticsScreen } from '@/features/analytics/screens/AnalyticsScreen'
+import { AnalyticsScreen } from '@/features/driver/analytics/screens/AnalyticsScreen'
 
 export default AnalyticsScreen
