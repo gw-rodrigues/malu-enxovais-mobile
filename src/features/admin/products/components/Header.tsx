@@ -6,8 +6,13 @@ import { Text } from '@/components/ui/text'
 import { View } from '@/components/ui/view'
 import { VStack } from '@/components/ui/vstack'
 import { Plus, QrCode } from 'lucide-react-native'
+import useProductsStore from '../hooks/useProductsStore'
+import AddProductModal from './AddProductModal'
+import SearchModal from './SearchModal'
+import UpdateStockModal from './UpdateStockModal'
 
 export default function Header() {
+  const { setShowSearchModal, setShowAddProductModal } = useProductsStore()
   return (
     <VStack space="lg">
       <View>
@@ -32,6 +37,7 @@ export default function Header() {
             variant="solid"
             action="primary"
             className="flex-1 w-auto h-auto p-4 rounded-xl "
+            onPress={() => setShowSearchModal(true)}
           >
             <VStack className="items-center justify-center text-center text-white">
               <Icon as={QrCode} color="white" />
@@ -51,6 +57,7 @@ export default function Header() {
             variant="solid"
             action="primary"
             className="flex-1 w-auto h-auto p-4 bg-white rounded-xl group"
+            onPress={() => setShowAddProductModal(true)}
           >
             <VStack className="items-center justify-center text-center text-white">
               <Icon
@@ -67,6 +74,9 @@ export default function Header() {
           </Button>
         </GridItem>
       </Grid>
+      <SearchModal />
+      <AddProductModal />
+      <UpdateStockModal />
     </VStack>
   )
 }

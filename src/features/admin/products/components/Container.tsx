@@ -13,12 +13,16 @@ import { VStack } from '@/components/ui/vstack'
 import { SearchIcon, Settings2 } from 'lucide-react-native'
 import { useState } from 'react'
 
+import useProductsStore from '../hooks/useProductsStore'
+import ProductsFiltersModal from './ProductsFiltersModal'
 import ProductsInDelivery from './ProductsInDelivery'
 import ProductsInStock from './ProductsInStock'
 
 export default function ProductsContainer() {
+  const { setShowProductsFiltersModal, setSearchProductQuery } =
+    useProductsStore()
+
   const [isInvalid, setIsInvalid] = useState(false)
-  const [filters, setFilters] = useState({ input: '', category: '' })
 
   return (
     <VStack space="lg" className="flex-grow">
@@ -37,13 +41,17 @@ export default function ProductsContainer() {
             </InputSlot>
             <InputField
               placeholder="Buscar por nome, categoria ou código QR"
-              onChangeText={(input) =>
-                setFilters((prev) => ({ ...prev, input }))
-              }
+              onChangeText={(input) => setSearchProductQuery(input)}
             />
           </Input>
 
-          <Button className="w-fit" size="md">
+          <Button
+            className="w-fit"
+            size="md"
+            onPress={() => {
+              setShowProductsFiltersModal(true)
+            }}
+          >
             <ButtonIcon as={Settings2} />
           </Button>
         </HStack>
@@ -67,6 +75,7 @@ export default function ProductsContainer() {
           },
         ]}
       />
+      <ProductsFiltersModal />
     </VStack>
   )
 }

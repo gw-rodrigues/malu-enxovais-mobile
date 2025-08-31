@@ -8,9 +8,41 @@ import { Text } from '@/components/ui/text'
 import { VStack } from '@/components/ui/vstack'
 import { mockProducts } from '@/features/admin/products/mock'
 import { Edit, TextSearch } from 'lucide-react-native'
+import { useEffect, useState } from 'react'
+import useProductsStore from '../hooks/useProductsStore'
+import { Product } from '../types/Products'
 
 export default function ProductsInStock() {
-  if (mockProducts.length <= 0)
+  const { searchProductQuery, setSelectedProduct, setShowUpdateStockModal } =
+    useProductsStore()
+
+  function handleSelectedProduct(item: Product) {
+    setSelectedProduct(item)
+    setShowUpdateStockModal(true)
+  }
+
+  const [filteredList, setFilteredList] = useState(mockProducts)
+
+  useEffect(() => {
+    if (searchProductQuery.length >= 3) {
+      setFilteredList((prev) =>
+        prev.filter(
+          (item) =>
+            item.name
+              .toLowerCase()
+              .includes(searchProductQuery.toLowerCase()) ||
+            item.categories?.name
+              .toLowerCase()
+              .includes(searchProductQuery.toLowerCase()) ||
+            item.sku.toLowerCase().includes(searchProductQuery.toLowerCase()),
+        ),
+      )
+    } else {
+      setFilteredList(mockProducts)
+    }
+  }, [searchProductQuery])
+
+  if (!filteredList || filteredList.length <= 0)
     return (
       <ScrollView className="py-4">
         <Card className="py-4" variant="elevated">
@@ -21,10 +53,11 @@ export default function ProductsInStock() {
         </Card>
       </ScrollView>
     )
+
   return (
     <ScrollView className="py-4">
       <VStack space="sm">
-        {mockProducts.map((item) => {
+        {filteredList.map((item) => {
           const stockAction: {
             title: string
             action: 'error' | 'warning' | 'success' | 'info'
@@ -73,7 +106,12 @@ export default function ProductsInStock() {
                 <Text className="font-bold">{item.qr_code}</Text>
               </HStack>
               <HStack className="justify-end mt-2">
-                <Button variant="outline" action="primary" size="sm">
+                <Button
+                  variant="outline"
+                  action="primary"
+                  size="sm"
+                  onPress={() => handleSelectedProduct(item)}
+                >
                   <ButtonIcon as={Edit} />
                 </Button>
               </HStack>
